@@ -33,3 +33,28 @@ The following steps will allow you to calculate the **survey weighted** percenta
 3. Using the `svymean` function, calculate the percentage of people that have ever had more than 4/5 drinks per day.
 
 4. Using the `svyby` function, get the percentage of respondents **by gender** who have ever had more than 4/5 drinks per day
+
+# Explanation
+
+3. Using the svymean function, calculate the percentage of people that have ever had more than 4/5 drinks per day.
+
+This is done using the svymean, and the explanation for svymean can be found under the surveysummary section in the documentation of the  (Links to an external site.)survey library (Links to an external site.):
+
+svymean(x, design, na.rm=FALSE)
+
+The x here is the column we've been working in, which is alq151. Don't forget to put a wave (~) in front of column names when we're working with the survey library!
+
+The design here is the survey design we created for question 2, which we called nhanes_survey during section. We also want NA's to be ignored, so let's make sure we do na.rm=TRUE.
+
+4. Using the svyby function, get the percentage of respondents by gender who have ever had more than 4/5 drinks per day
+
+The svyby function calculates statistics "by" a certain standard; in this case, it's gender.We once again look for the function in the documentation (Links to an external site.), which gives us the code:
+svyby(formula, by ,design, FUN,...)
+
+formula here refers to the "A formula specifying the variables to pass to FUN (or a matrix, data frame, or vector)", which is just another way of saying the column/data frame we're currently working in. Once again, that is alq151 for us.
+
+The by parameter expects a column that another "formula" that serves as the dividing factor that we are dividing "by". In this case, that is gender, so we look for the gender column. Thankfully, we have the DEMO_I codebook (Links to an external site.), which tells us that ~riagendr is the column we're looking for.
+
+The design parameter once again refers to the survey design object, which is nhanes_survey.
+
+Lastly, FUN is the function we're applying to the formula, which is mean. In the survey library, that is svymean.
